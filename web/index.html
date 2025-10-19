@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Analysis - D3 Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Heart Disease Analysis</h1>
+            <p class="subtitle">Exploring Clinical Patterns in Cardiovascular Health</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tabs">
+            <button class="tab-button active" data-task="task1">
+                <span class="tab-number">1</span>
+                <span class="tab-label">Age & Heart Disease</span>
+            </button>
+            <button class="tab-button" data-task="task2">
+                <span class="tab-number">2</span>
+                <span class="tab-label">Cholesterol & BP</span>
+            </button>
+            <button class="tab-button" data-task="task3">
+                <span class="tab-number">3</span>
+                <span class="tab-label">Gender Patterns</span>
+            </button>
+            <button class="tab-button" data-task="task4">
+                <span class="tab-number">4</span>
+                <span class="tab-label">Chest Pain Types</span>
+            </button>
+            <button class="tab-button" data-task="task5">
+                <span class="tab-number">5</span>
+                <span class="tab-label">Exercise & Heart Rate</span>
+            </button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <!-- Task 1: Age vs Heart Disease -->
+            <div class="task-panel active" id="task1">
+                <div class="panel-header">
+                    <h2>Task 1: How does heart disease likelihood vary across age groups?</h2>
+                    <p class="description">Scatter plot showing age distribution relative to heart disease presence</p>
+                </div>
+                <div id="visualization-task1" class="visualization-container">
+                    <!-- D3 visualization will be rendered here -->
+                </div>
+                <div class="panel-footer">
+                    <p class="task-info">Variables: Age (age) vs Heart Disease (target)</p>
+                </div>
+            </div>
+
+            <!-- Task 2: Cholesterol & Resting Blood Pressure -->
+            <div class="task-panel" id="task2">
+                <div class="panel-header">
+                    <h2>Task 2: Relationship between cholesterol, blood pressure, and heart disease</h2>
+                    <p class="description">Scatter plot comparing cholesterol and resting blood pressure by disease status</p>
+                </div>
+                <div id="visualization-task2" class="visualization-container">
+                    <!-- D3 visualization will be rendered here -->
+                </div>
+                <div class="panel-footer">
+                    <p class="task-info">Variables: Cholesterol (chol) vs Resting BP (trestbps) colored by Disease (target)</p>
+                </div>
+            </div>
+
+            <!-- Task 3: Gender Patterns -->
+            <div class="task-panel" id="task3">
+                <div class="panel-header">
+                    <h2>Task 3: Do men and women show different heart disease patterns?</h2>
+                    <p class="description">Bar chart showing disease prevalence by gender</p>
+                </div>
+                <div id="visualization-task3" class="visualization-container">
+                    <!-- D3 visualization will be rendered here -->
+                </div>
+                <div class="panel-footer">
+                    <p class="task-info">Variables: Sex (sex) vs Heart Disease Presence (target)</p>
+                </div>
+            </div>
+
+            <!-- Task 4: Chest Pain Types -->
+            <div class="task-panel" id="task4">
+                <div class="panel-header">
+                    <h2>Task 4: Which chest pain types are most associated with heart disease?</h2>
+                    <p class="description">Heatmap showing chest pain type vs disease outcomes</p>
+                </div>
+                <div id="visualization-task4" class="visualization-container">
+                    <!-- D3 visualization will be rendered here -->
+                </div>
+                <div class="panel-footer">
+                    <p class="task-info">Variables: Chest Pain Type (cp) vs Heart Disease (target)</p>
+                </div>
+            </div>
+
+            <!-- Task 5: Exercise Indicators -->
+            <div class="task-panel" id="task5">
+                <div class="panel-header">
+                    <h2>Task 5: How do exercise indicators relate to heart disease?</h2>
+                    <p class="description">Scatter plot with exercise-induced angina and max heart rate indicators</p>
+                </div>
+                <div id="visualization-task5" class="visualization-container">
+                    <!-- D3 visualization will be rendered here -->
+                </div>
+                <div class="panel-footer">
+                    <p class="task-info">Variables: Max Heart Rate (thalach) vs Age colored by Angina (exang), sized by Disease (target)</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Heart Disease Dataset | UCI Machine Learning Repository | Cleveland Clinic Foundation Study</p>
+        </footer>
+    </div>
+
+    <!-- Script Imports -->
+    <script src="js/utils.js"></script>
+    <script src="js/task1.js"></script>
+    <script src="js/task2.js"></script>
+    <script src="js/task3.js"></script>
+    <script src="js/task4.js"></script>
+    <script src="js/task5.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
