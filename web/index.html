@@ -41,6 +41,10 @@
                     <span class="tab-number">6</span>
                     <span class="tab-label">Interactive Techniques</span>
                 </button>
+                <button class="tab-button" data-task="task7">
+                    <span class="tab-number">7</span>
+                    <span class="tab-label">MCV Dashboard</span>
+                </button>
             </nav>
         </header>
 
@@ -346,6 +350,85 @@
                     <div id="statistics-task6" class="stats-grid"></div>
                 </div>
             </div>
+
+            <!-- Task 7: Multiple Coordinated Views Dashboard -->
+            <div class="task-panel" id="task7">
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Multiple Coordinated Views Dashboard</h2>
+                        <p class="section-subtitle">Interactive dashboard demonstrating advanced view coordination
+                            strategies</p>
+                    </div>
+                    <div class="content-block">
+                        <p>This dashboard showcases five key coordination strategies: <strong>Juxtaposition</strong>
+                            (multiple side-by-side views), <strong>Integrated</strong> (combined chart with multiple
+                            encodings), <strong>Superimpose</strong> (overlaid data layers), <strong>Brushing &
+                                Linking</strong> (cross-view selection), and <strong>Dynamic Queries</strong> (filtering
+                            controls). All views are interconnected and update in real-time based on your interactions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Dynamic Query Controls -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Dynamic Query Filters</h3>
+                        <p class="section-subtitle">Filter all views simultaneously with dropdown controls</p>
+                    </div>
+                    <div id="query-controls-task7" class="content-block">
+                        <!-- Dynamically populated controls -->
+                    </div>
+                </div>
+
+                <!-- Juxtaposition: Side-by-side Views -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Juxtaposition: Multiple Views</h3>
+                        <p class="section-subtitle">Brush on any chart to link selections across all views</p>
+                    </div>
+                    <div class="viz-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        <div class="viz-item">
+                            <h4 style="margin-bottom: 10px; font-weight: 600;">Age vs Cholesterol</h4>
+                            <div class="viz-chart" id="task7-scatter"></div>
+                        </div>
+                        <div class="viz-item">
+                            <h4 style="margin-bottom: 10px; font-weight: 600;">Age Distribution</h4>
+                            <div class="viz-chart" id="task7-age-hist"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integrated View -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Integrated View: Multi-Encoding Chart</h3>
+                        <p class="section-subtitle">Combined visualization with multiple data dimensions</p>
+                    </div>
+                    <div class="viz-container">
+                        <div id="task7-integrated" class="viz-chart"></div>
+                    </div>
+                </div>
+
+                <!-- Superimpose View -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Superimpose: Overlaid Data Layers</h3>
+                        <p class="section-subtitle">Multiple data series layered in a single view</p>
+                    </div>
+                    <div class="viz-container">
+                        <div id="task7-superimpose" class="viz-chart"></div>
+                    </div>
+                </div>
+
+                <!-- Summary Statistics -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Selection Summary</h3>
+                        <p class="section-subtitle">Statistics update based on filtered/selected data</p>
+                    </div>
+                    <div id="statistics-task7" class="stats-grid"></div>
+                </div>
+            </div>
         </main>
 
         <!-- Footer -->
@@ -362,6 +445,7 @@
     <script src="js/task4.js"></script>
     <script src="js/task5.js"></script>
     <script src="js/task6.js"></script>
+    <script src="js/task7.js"></script>
     <script src="js/main.js"></script>
 </body>
 

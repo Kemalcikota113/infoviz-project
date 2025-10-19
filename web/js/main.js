@@ -11,6 +11,7 @@ const App = (() => {
     task4: Task4,
     task5: Task5,
     task6: Task6,
+    task7: Task7,
   };
 
   let currentTask = "task1";
