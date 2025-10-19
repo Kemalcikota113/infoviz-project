@@ -10,9 +10,11 @@ const App = (() => {
     task3: Task3,
     task4: Task4,
     task5: Task5,
+    task6: Task6,
   };
 
   let currentTask = "task1";
+  const initializedTasks = new Set();
 
   /**
    * Initialize the application
@@ -61,6 +63,13 @@ const App = (() => {
       panel.classList.remove("active");
     });
     document.getElementById(taskId).classList.add("active");
+
+    // Initialize the task
+    const task = TABS[taskId];
+    if (task && task.init && !initializedTasks.has(taskId)) {
+      task.init();
+      initializedTasks.add(taskId);
+    }
 
     console.log(`Switched to ${taskId}`);
   }
