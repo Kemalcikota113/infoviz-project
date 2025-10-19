@@ -12,14 +12,14 @@
  * @returns {Promise<Array>} - Array of data objects
  */
 async function loadData(filePath) {
-    try {
-        const data = await d3.csv(filePath);
-        console.log(`Loaded ${data.length} records from ${filePath}`);
-        return data;
-    } catch (error) {
-        console.error('Error loading data:', error);
-        return [];
-    }
+  try {
+    const data = await d3.csv(filePath);
+    console.log(`Loaded ${data.length} records from ${filePath}`);
+    return data;
+  } catch (error) {
+    console.error("Error loading data:", error);
+    return [];
+  }
 }
 
 /**
@@ -28,8 +28,8 @@ async function loadData(filePath) {
  * @returns {number|null} - Converted number or null
  */
 function parseNumeric(value) {
-    const num = +value;
-    return isNaN(num) ? null : num;
+  const num = +value;
+  return isNaN(num) ? null : num;
 }
 
 /**
@@ -39,15 +39,15 @@ function parseNumeric(value) {
  * @returns {Array<Object>} - Data with parsed columns
  */
 function parseNumericColumns(data, numericColumns) {
-    return data.map(d => {
-        const row = { ...d };
-        numericColumns.forEach(col => {
-            if (col in row) {
-                row[col] = parseNumeric(row[col]);
-            }
-        });
-        return row;
+  return data.map((d) => {
+    const row = { ...d };
+    numericColumns.forEach((col) => {
+      if (col in row) {
+        row[col] = parseNumeric(row[col]);
+      }
     });
+    return row;
+  });
 }
 
 /**
@@ -57,7 +57,7 @@ function parseNumericColumns(data, numericColumns) {
  * @returns {Array<Object>} - Filtered data
  */
 function removeNullRecords(data, columns) {
-    return data.filter(d => columns.every(col => d[col] != null));
+  return data.filter((d) => columns.every((col) => d[col] != null));
 }
 
 // ============================================
@@ -71,7 +71,7 @@ function removeNullRecords(data, columns) {
  * @returns {d3.ScaleLinear}
  */
 function createLinearScale(domain, range) {
-    return d3.scaleLinear().domain(domain).range(range);
+  return d3.scaleLinear().domain(domain).range(range);
 }
 
 /**
@@ -81,7 +81,7 @@ function createLinearScale(domain, range) {
  * @returns {d3.ScaleBand}
  */
 function createBandScale(domain, range) {
-    return d3.scaleBand().domain(domain).range(range).padding(0.1);
+  return d3.scaleBand().domain(domain).range(range).padding(0.1);
 }
 
 /**
@@ -91,7 +91,7 @@ function createBandScale(domain, range) {
  * @returns {d3.ScaleOrdinal}
  */
 function createColorScale(domain, colors) {
-    return d3.scaleOrdinal().domain(domain).range(colors);
+  return d3.scaleOrdinal().domain(domain).range(colors);
 }
 
 /**
@@ -101,7 +101,7 @@ function createColorScale(domain, colors) {
  * @returns {d3.ScaleQuantile}
  */
 function createQuantileColorScale(data, colors) {
-    return d3.scaleQuantile().domain(data).range(colors);
+  return d3.scaleQuantile().domain(data).range(colors);
 }
 
 /**
@@ -111,7 +111,7 @@ function createQuantileColorScale(data, colors) {
  * @returns {d3.Axis}
  */
 function createBottomAxis(scale, label) {
-    return d3.axisBottom(scale);
+  return d3.axisBottom(scale);
 }
 
 /**
@@ -121,7 +121,7 @@ function createBottomAxis(scale, label) {
  * @returns {d3.Axis}
  */
 function createLeftAxis(scale, label) {
-    return d3.axisLeft(scale);
+  return d3.axisLeft(scale);
 }
 
 // ============================================
@@ -129,10 +129,10 @@ function createLeftAxis(scale, label) {
 // ============================================
 
 const DEFAULT_MARGINS = {
-    top: 40,
-    right: 40,
-    bottom: 60,
-    left: 60
+  top: 40,
+  right: 40,
+  bottom: 60,
+  left: 60,
 };
 
 /**
@@ -142,11 +142,15 @@ const DEFAULT_MARGINS = {
  * @param {Object} margins - {top, right, bottom, left}
  * @returns {Object} - {width, height}
  */
-function getInnerDimensions(containerWidth, containerHeight, margins = DEFAULT_MARGINS) {
-    return {
-        width: containerWidth - margins.left - margins.right,
-        height: containerHeight - margins.top - margins.bottom
-    };
+function getInnerDimensions(
+  containerWidth,
+  containerHeight,
+  margins = DEFAULT_MARGINS
+) {
+  return {
+    width: containerWidth - margins.left - margins.right,
+    height: containerHeight - margins.top - margins.bottom,
+  };
 }
 
 /**
@@ -155,15 +159,15 @@ function getInnerDimensions(containerWidth, containerHeight, margins = DEFAULT_M
  * @returns {Object} - {width, height}
  */
 function getContainerDimensions(selector) {
-    const element = document.querySelector(selector);
-    if (!element) {
-        console.warn(`Container ${selector} not found`);
-        return { width: 800, height: 600 };
-    }
-    return {
-        width: element.clientWidth,
-        height: element.clientHeight
-    };
+  const element = document.querySelector(selector);
+  if (!element) {
+    console.warn(`Container ${selector} not found`);
+    return { width: 800, height: 600 };
+  }
+  return {
+    width: element.clientWidth,
+    height: element.clientHeight,
+  };
 }
 
 // ============================================
@@ -178,16 +182,18 @@ function getContainerDimensions(selector) {
  * @returns {Object} - {svg, g} - SVG element and main group
  */
 function createSvg(selector, width, height, margins = DEFAULT_MARGINS) {
-    const svg = d3.select(selector)
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height)
-        .attr('class', 'visualization-svg');
+  const svg = d3
+    .select(selector)
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("class", "visualization-svg");
 
-    const g = svg.append('g')
-        .attr('transform', `translate(${margins.left},${margins.top})`);
+  const g = svg
+    .append("g")
+    .attr("transform", `translate(${margins.left},${margins.top})`);
 
-    return { svg, g, margins, width, height };
+  return { svg, g, margins, width, height };
 }
 
 /**
@@ -195,7 +201,7 @@ function createSvg(selector, width, height, margins = DEFAULT_MARGINS) {
  * @param {string} selector - Container selector
  */
 function clearContainer(selector) {
-    d3.select(selector).selectAll('*').remove();
+  d3.select(selector).selectAll("*").remove();
 }
 
 /**
@@ -207,13 +213,13 @@ function clearContainer(selector) {
  * @param {number} y - Y position
  */
 function addAxisLabel(g, label, position, x, y) {
-    g.append('text')
-        .attr('class', 'axis-label')
-        .attr('x', x)
-        .attr('y', y)
-        .attr('text-anchor', position === 'bottom' ? 'middle' : 'start')
-        .style('fill', '#1a1a1a')
-        .text(label);
+  g.append("text")
+    .attr("class", "axis-label")
+    .attr("x", x)
+    .attr("y", y)
+    .attr("text-anchor", position === "bottom" ? "middle" : "start")
+    .style("fill", "#1a1a1a")
+    .text(label);
 }
 
 // ============================================
@@ -225,18 +231,19 @@ function addAxisLabel(g, label, position, x, y) {
  * @returns {Object} - Tooltip D3 selection
  */
 function createTooltip() {
-    return d3.select('body')
-        .append('div')
-        .attr('class', 'tooltip')
-        .style('position', 'absolute')
-        .style('padding', '8px 16px')
-        .style('background-color', '#1a1a1a')
-        .style('color', '#ffffff')
-        .style('border-radius', '2px')
-        .style('font-size', '12px')
-        .style('pointer-events', 'none')
-        .style('opacity', '0')
-        .style('z-index', '1000');
+  return d3
+    .select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("position", "absolute")
+    .style("padding", "8px 16px")
+    .style("background-color", "#1a1a1a")
+    .style("color", "#ffffff")
+    .style("border-radius", "2px")
+    .style("font-size", "12px")
+    .style("pointer-events", "none")
+    .style("opacity", "0")
+    .style("z-index", "1000");
 }
 
 /**
@@ -247,11 +254,11 @@ function createTooltip() {
  * @param {number} y - Y position
  */
 function showTooltip(tooltip, text, x, y) {
-    tooltip
-        .style('opacity', '1')
-        .html(text)
-        .style('left', (x + 10) + 'px')
-        .style('top', (y - 28) + 'px');
+  tooltip
+    .style("opacity", "1")
+    .html(text)
+    .style("left", x + 10 + "px")
+    .style("top", y - 28 + "px");
 }
 
 /**
@@ -259,7 +266,7 @@ function showTooltip(tooltip, text, x, y) {
  * @param {Object} tooltip - Tooltip D3 selection
  */
 function hideTooltip(tooltip) {
-    tooltip.style('opacity', '0');
+  tooltip.style("opacity", "0");
 }
 
 // ============================================
@@ -273,12 +280,12 @@ function hideTooltip(tooltip) {
  * @returns {Array<Object>} - [{key, value}, ...]
  */
 function countByColumn(data, column) {
-    const counts = {};
-    data.forEach(d => {
-        const key = d[column];
-        counts[key] = (counts[key] || 0) + 1;
-    });
-    return Object.entries(counts).map(([key, value]) => ({ key, value }));
+  const counts = {};
+  data.forEach((d) => {
+    const key = d[column];
+    counts[key] = (counts[key] || 0) + 1;
+  });
+  return Object.entries(counts).map(([key, value]) => ({ key, value }));
 }
 
 /**
@@ -288,7 +295,7 @@ function countByColumn(data, column) {
  * @returns {Object} - Grouped data object
  */
 function groupByColumn(data, column) {
-    return d3.group(data, d => d[column]);
+  return d3.group(data, (d) => d[column]);
 }
 
 /**
@@ -298,20 +305,20 @@ function groupByColumn(data, column) {
  * @returns {Object} - {min, max, mean, median, std}
  */
 function getColumnStats(data, column) {
-    const values = data
-        .map(d => d[column])
-        .filter(v => v != null)
-        .sort((a, b) => a - b);
+  const values = data
+    .map((d) => d[column])
+    .filter((v) => v != null)
+    .sort((a, b) => a - b);
 
-    if (values.length === 0) return null;
+  if (values.length === 0) return null;
 
-    const min = d3.min(values);
-    const max = d3.max(values);
-    const mean = d3.mean(values);
-    const median = d3.median(values);
-    const std = d3.deviation(values);
+  const min = d3.min(values);
+  const max = d3.max(values);
+  const mean = d3.mean(values);
+  const median = d3.median(values);
+  const std = d3.deviation(values);
 
-    return { min, max, mean, median, std };
+  return { min, max, mean, median, std };
 }
 
 // ============================================
@@ -319,20 +326,27 @@ function getColumnStats(data, column) {
 // ============================================
 
 const COLOR_SCHEMES = {
-    // Semantic colors for disease status
-    disease: {
-        present: '#e74c3c',      // Red
-        absent: '#2ecc71'        // Green
-    },
-    // Gender colors
-    gender: {
-        male: '#0066cc',         // Blue
-        female: '#ff8c00'        // Orange
-    },
-    // Quantitative scales
-    sequential: ['#f0f0f0', '#cccccc', '#666666', '#1a1a1a'],
-    diverging: ['#2ecc71', '#e6f0ff', '#e74c3c'],
-    categorical: ['#0066cc', '#ff8c00', '#2ecc71', '#e74c3c', '#9b59b6', '#f39c12']
+  // Semantic colors for disease status
+  disease: {
+    present: "#e74c3c", // Red
+    absent: "#2ecc71", // Green
+  },
+  // Gender colors
+  gender: {
+    male: "#0066cc", // Blue
+    female: "#ff8c00", // Orange
+  },
+  // Quantitative scales
+  sequential: ["#f0f0f0", "#cccccc", "#666666", "#1a1a1a"],
+  diverging: ["#2ecc71", "#e6f0ff", "#e74c3c"],
+  categorical: [
+    "#0066cc",
+    "#ff8c00",
+    "#2ecc71",
+    "#e74c3c",
+    "#9b59b6",
+    "#f39c12",
+  ],
 };
 
 // ============================================
@@ -346,7 +360,7 @@ const COLOR_SCHEMES = {
  * @returns {string}
  */
 function formatNumber(value, decimals = 2) {
-    return parseFloat(value).toFixed(decimals);
+  return parseFloat(value).toFixed(decimals);
 }
 
 /**
@@ -356,8 +370,8 @@ function formatNumber(value, decimals = 2) {
  * @returns {string}
  */
 function formatPercent(value, isDecimal = true) {
-    const percent = isDecimal ? value * 100 : value;
-    return percent.toFixed(1) + '%';
+  const percent = isDecimal ? value * 100 : value;
+  return percent.toFixed(1) + "%";
 }
 
 /**
@@ -366,8 +380,8 @@ function formatPercent(value, isDecimal = true) {
  * @returns {string}
  */
 function formatCompact(value) {
-    if (value >= 1e9) return (value / 1e9).toFixed(1) + 'B';
-    if (value >= 1e6) return (value / 1e6).toFixed(1) + 'M';
-    if (value >= 1e3) return (value / 1e3).toFixed(1) + 'K';
-    return value.toFixed(0);
+  if (value >= 1e9) return (value / 1e9).toFixed(1) + "B";
+  if (value >= 1e6) return (value / 1e6).toFixed(1) + "M";
+  if (value >= 1e3) return (value / 1e3).toFixed(1) + "K";
+  return value.toFixed(0);
 }
